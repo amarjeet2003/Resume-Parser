@@ -5,7 +5,7 @@ import pandas as pd
 
 app = Flask(__name__)
 
-UPLOAD_FOLDER = 'uploads'
+UPLOAD_FOLDER = '/tmp/uploads'
 ALLOWED_EXTENSIONS = {'pdf', 'docx'}
 
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
@@ -40,7 +40,7 @@ def upload_files():
             extracted_data.append(data)
 
     if extracted_data:
-        output_file = 'output_data.csv'
+        output_file = '/tmp/output_data.csv'
         df = pd.DataFrame(extracted_data)
         df.to_csv(output_file, index=False)
         return send_file(output_file, as_attachment=True)
